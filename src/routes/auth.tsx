@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { z } from "zod";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -128,6 +128,9 @@ function AuthPage() {
                   <h1 className="text-2xl font-bold">Welcome back</h1>
                   <div className="space-y-2"><Label htmlFor="le">Email</Label><Input id="le" name="email" type="email" required autoComplete="email" /></div>
                   <div className="space-y-2"><Label htmlFor="lp">Password</Label><Input id="lp" name="password" type="password" required autoComplete="current-password" /></div>
+                  <div className="text-right">
+                    <Link to="/forgot-password" className="text-sm text-primary hover:underline">Forgot your password?</Link>
+                  </div>
                   <Button className="w-full" disabled={busy}>{busy ? "Signing in…" : "Sign in"}</Button>
                 </form>
               </TabsContent>
