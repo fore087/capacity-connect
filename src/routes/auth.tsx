@@ -59,11 +59,11 @@ function AuthPage() {
     const f = new FormData(e.currentTarget);
     const email = String(f.get("email") ?? "").trim();
     const password = String(f.get("password") ?? "");
-    if (!z.string().email().safeParse(email).success) return toast.error("Enter a valid email address");
+    if (!z.string().email().safeParse(email).success) { toast.error("Enter a valid email address"); return; }
     setBusy(true);
     const { error } = await supabase.auth.signInWithPassword({ email, password });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     navigate({ to: "/dashboard" });
   }
 
@@ -76,8 +76,8 @@ function AuthPage() {
       password: f.get("password"),
       role,
     });
-    if (!parsed.success) return toast.error(parsed.error.errors[0].message);
-    if (f.get("password") !== f.get("confirm")) return toast.error("Passwords do not match");
+    if (!parsed.success) { toast.error(parsed.error.errors[0]?.message ?? "Invalid input"); return; }
+    if (f.get("password") !== f.get("confirm")) { toast.error("Passwords do not match"); return; }
     setBusy(true);
     const { data, error } = await supabase.auth.signUp({
       email: parsed.data.email,
@@ -88,7 +88,7 @@ function AuthPage() {
       },
     });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     if (!data.session) setCheckEmail(true);
   }
 
