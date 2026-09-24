@@ -18,8 +18,12 @@ import { Route as AuthenticatedNotificationsRouteImport } from './routes/_authen
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as CoursesIndexRouteImport } from './routes/courses.index'
 import { Route as CoursesCourseIdRouteImport } from './routes/courses.$courseId'
+import { Route as AuthenticatedAssessmentsIndexRouteImport } from './routes/_authenticated/assessments.index'
+import { Route as AuthenticatedAssessmentsAssessmentIdRouteImport } from './routes/_authenticated/assessments.$assessmentId'
 import { Route as AuthenticatedAssignmentsIndexRouteImport } from './routes/_authenticated/assignments.index'
 import { Route as AuthenticatedAssignmentsAssignmentIdRouteImport } from './routes/_authenticated/assignments.$assignmentId'
+import { Route as AuthenticatedCertificatesIndexRouteImport } from './routes/_authenticated/certificates.index'
+import { Route as AuthenticatedCertificatesCertificateIdRouteImport } from './routes/_authenticated/certificates.$certificateId'
 import { Route as AuthenticatedLearnIndexRouteImport } from './routes/_authenticated/learn.index'
 import { Route as AuthenticatedLearnCourseIdRouteImport } from './routes/_authenticated/learn.$courseId'
 
@@ -68,6 +72,18 @@ const CoursesCourseIdRoute = CoursesCourseIdRouteImport.update({
   path: '/courses/$courseId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAssessmentsIndexRoute =
+  AuthenticatedAssessmentsIndexRouteImport.update({
+    id: '/assessments/',
+    path: '/assessments/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAssessmentsAssessmentIdRoute =
+  AuthenticatedAssessmentsAssessmentIdRouteImport.update({
+    id: '/assessments/$assessmentId',
+    path: '/assessments/$assessmentId',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedAssignmentsIndexRoute =
   AuthenticatedAssignmentsIndexRouteImport.update({
     id: '/assignments/',
@@ -78,6 +94,18 @@ const AuthenticatedAssignmentsAssignmentIdRoute =
   AuthenticatedAssignmentsAssignmentIdRouteImport.update({
     id: '/assignments/$assignmentId',
     path: '/assignments/$assignmentId',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedCertificatesIndexRoute =
+  AuthenticatedCertificatesIndexRouteImport.update({
+    id: '/certificates/',
+    path: '/certificates/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedCertificatesCertificateIdRoute =
+  AuthenticatedCertificatesCertificateIdRouteImport.update({
+    id: '/certificates/$certificateId',
+    path: '/certificates/$certificateId',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedLearnIndexRoute = AuthenticatedLearnIndexRouteImport.update({
@@ -101,9 +129,13 @@ export interface FileRoutesByFullPath {
   '/profile': typeof AuthenticatedProfileRoute
   '/courses/$courseId': typeof CoursesCourseIdRoute
   '/courses/': typeof CoursesIndexRoute
+  '/assessments/$assessmentId': typeof AuthenticatedAssessmentsAssessmentIdRoute
   '/assignments/$assignmentId': typeof AuthenticatedAssignmentsAssignmentIdRoute
+  '/certificates/$certificateId': typeof AuthenticatedCertificatesCertificateIdRoute
   '/learn/$courseId': typeof AuthenticatedLearnCourseIdRoute
+  '/assessments/': typeof AuthenticatedAssessmentsIndexRoute
   '/assignments/': typeof AuthenticatedAssignmentsIndexRoute
+  '/certificates/': typeof AuthenticatedCertificatesIndexRoute
   '/learn/': typeof AuthenticatedLearnIndexRoute
 }
 export interface FileRoutesByTo {
@@ -115,9 +147,13 @@ export interface FileRoutesByTo {
   '/profile': typeof AuthenticatedProfileRoute
   '/courses/$courseId': typeof CoursesCourseIdRoute
   '/courses': typeof CoursesIndexRoute
+  '/assessments/$assessmentId': typeof AuthenticatedAssessmentsAssessmentIdRoute
   '/assignments/$assignmentId': typeof AuthenticatedAssignmentsAssignmentIdRoute
+  '/certificates/$certificateId': typeof AuthenticatedCertificatesCertificateIdRoute
   '/learn/$courseId': typeof AuthenticatedLearnCourseIdRoute
+  '/assessments': typeof AuthenticatedAssessmentsIndexRoute
   '/assignments': typeof AuthenticatedAssignmentsIndexRoute
+  '/certificates': typeof AuthenticatedCertificatesIndexRoute
   '/learn': typeof AuthenticatedLearnIndexRoute
 }
 export interface FileRoutesById {
@@ -131,9 +167,13 @@ export interface FileRoutesById {
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/courses/$courseId': typeof CoursesCourseIdRoute
   '/courses/': typeof CoursesIndexRoute
+  '/_authenticated/assessments/$assessmentId': typeof AuthenticatedAssessmentsAssessmentIdRoute
   '/_authenticated/assignments/$assignmentId': typeof AuthenticatedAssignmentsAssignmentIdRoute
+  '/_authenticated/certificates/$certificateId': typeof AuthenticatedCertificatesCertificateIdRoute
   '/_authenticated/learn/$courseId': typeof AuthenticatedLearnCourseIdRoute
+  '/_authenticated/assessments/': typeof AuthenticatedAssessmentsIndexRoute
   '/_authenticated/assignments/': typeof AuthenticatedAssignmentsIndexRoute
+  '/_authenticated/certificates/': typeof AuthenticatedCertificatesIndexRoute
   '/_authenticated/learn/': typeof AuthenticatedLearnIndexRoute
 }
 export interface FileRouteTypes {
@@ -147,9 +187,13 @@ export interface FileRouteTypes {
     | '/profile'
     | '/courses/$courseId'
     | '/courses/'
+    | '/assessments/$assessmentId'
     | '/assignments/$assignmentId'
+    | '/certificates/$certificateId'
     | '/learn/$courseId'
+    | '/assessments/'
     | '/assignments/'
+    | '/certificates/'
     | '/learn/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -161,9 +205,13 @@ export interface FileRouteTypes {
     | '/profile'
     | '/courses/$courseId'
     | '/courses'
+    | '/assessments/$assessmentId'
     | '/assignments/$assignmentId'
+    | '/certificates/$certificateId'
     | '/learn/$courseId'
+    | '/assessments'
     | '/assignments'
+    | '/certificates'
     | '/learn'
   id:
     | '__root__'
@@ -176,9 +224,13 @@ export interface FileRouteTypes {
     | '/_authenticated/profile'
     | '/courses/$courseId'
     | '/courses/'
+    | '/_authenticated/assessments/$assessmentId'
     | '/_authenticated/assignments/$assignmentId'
+    | '/_authenticated/certificates/$certificateId'
     | '/_authenticated/learn/$courseId'
+    | '/_authenticated/assessments/'
     | '/_authenticated/assignments/'
+    | '/_authenticated/certificates/'
     | '/_authenticated/learn/'
   fileRoutesById: FileRoutesById
 }
@@ -256,6 +308,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CoursesCourseIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/assessments/': {
+      id: '/_authenticated/assessments/'
+      path: '/assessments'
+      fullPath: '/assessments/'
+      preLoaderRoute: typeof AuthenticatedAssessmentsIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/assessments/$assessmentId': {
+      id: '/_authenticated/assessments/$assessmentId'
+      path: '/assessments/$assessmentId'
+      fullPath: '/assessments/$assessmentId'
+      preLoaderRoute: typeof AuthenticatedAssessmentsAssessmentIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/assignments/': {
       id: '/_authenticated/assignments/'
       path: '/assignments'
@@ -268,6 +334,20 @@ declare module '@tanstack/react-router' {
       path: '/assignments/$assignmentId'
       fullPath: '/assignments/$assignmentId'
       preLoaderRoute: typeof AuthenticatedAssignmentsAssignmentIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/certificates/': {
+      id: '/_authenticated/certificates/'
+      path: '/certificates'
+      fullPath: '/certificates/'
+      preLoaderRoute: typeof AuthenticatedCertificatesIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/certificates/$certificateId': {
+      id: '/_authenticated/certificates/$certificateId'
+      path: '/certificates/$certificateId'
+      fullPath: '/certificates/$certificateId'
+      preLoaderRoute: typeof AuthenticatedCertificatesCertificateIdRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/learn/': {
@@ -291,9 +371,13 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedNotificationsRoute: typeof AuthenticatedNotificationsRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
+  AuthenticatedAssessmentsAssessmentIdRoute: typeof AuthenticatedAssessmentsAssessmentIdRoute
   AuthenticatedAssignmentsAssignmentIdRoute: typeof AuthenticatedAssignmentsAssignmentIdRoute
+  AuthenticatedCertificatesCertificateIdRoute: typeof AuthenticatedCertificatesCertificateIdRoute
   AuthenticatedLearnCourseIdRoute: typeof AuthenticatedLearnCourseIdRoute
+  AuthenticatedAssessmentsIndexRoute: typeof AuthenticatedAssessmentsIndexRoute
   AuthenticatedAssignmentsIndexRoute: typeof AuthenticatedAssignmentsIndexRoute
+  AuthenticatedCertificatesIndexRoute: typeof AuthenticatedCertificatesIndexRoute
   AuthenticatedLearnIndexRoute: typeof AuthenticatedLearnIndexRoute
 }
 
@@ -301,10 +385,16 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedNotificationsRoute: AuthenticatedNotificationsRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
+  AuthenticatedAssessmentsAssessmentIdRoute:
+    AuthenticatedAssessmentsAssessmentIdRoute,
   AuthenticatedAssignmentsAssignmentIdRoute:
     AuthenticatedAssignmentsAssignmentIdRoute,
+  AuthenticatedCertificatesCertificateIdRoute:
+    AuthenticatedCertificatesCertificateIdRoute,
   AuthenticatedLearnCourseIdRoute: AuthenticatedLearnCourseIdRoute,
+  AuthenticatedAssessmentsIndexRoute: AuthenticatedAssessmentsIndexRoute,
   AuthenticatedAssignmentsIndexRoute: AuthenticatedAssignmentsIndexRoute,
+  AuthenticatedCertificatesIndexRoute: AuthenticatedCertificatesIndexRoute,
   AuthenticatedLearnIndexRoute: AuthenticatedLearnIndexRoute,
 }
 
