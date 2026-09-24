@@ -26,6 +26,7 @@ import { Route as AuthenticatedCertificatesIndexRouteImport } from './routes/_au
 import { Route as AuthenticatedCertificatesCertificateIdRouteImport } from './routes/_authenticated/certificates.$certificateId'
 import { Route as AuthenticatedLearnIndexRouteImport } from './routes/_authenticated/learn.index'
 import { Route as AuthenticatedLearnCourseIdRouteImport } from './routes/_authenticated/learn.$courseId'
+import { Route as AuthenticatedTeachIndexRouteImport } from './routes/_authenticated/teach.index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -119,6 +120,11 @@ const AuthenticatedLearnCourseIdRoute =
     path: '/learn/$courseId',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedTeachIndexRoute = AuthenticatedTeachIndexRouteImport.update({
+  id: '/teach/',
+  path: '/teach/',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -137,6 +143,7 @@ export interface FileRoutesByFullPath {
   '/assignments/': typeof AuthenticatedAssignmentsIndexRoute
   '/certificates/': typeof AuthenticatedCertificatesIndexRoute
   '/learn/': typeof AuthenticatedLearnIndexRoute
+  '/teach/': typeof AuthenticatedTeachIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -155,6 +162,7 @@ export interface FileRoutesByTo {
   '/assignments': typeof AuthenticatedAssignmentsIndexRoute
   '/certificates': typeof AuthenticatedCertificatesIndexRoute
   '/learn': typeof AuthenticatedLearnIndexRoute
+  '/teach': typeof AuthenticatedTeachIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -175,6 +183,7 @@ export interface FileRoutesById {
   '/_authenticated/assignments/': typeof AuthenticatedAssignmentsIndexRoute
   '/_authenticated/certificates/': typeof AuthenticatedCertificatesIndexRoute
   '/_authenticated/learn/': typeof AuthenticatedLearnIndexRoute
+  '/_authenticated/teach/': typeof AuthenticatedTeachIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -195,6 +204,7 @@ export interface FileRouteTypes {
     | '/assignments/'
     | '/certificates/'
     | '/learn/'
+    | '/teach/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -213,6 +223,7 @@ export interface FileRouteTypes {
     | '/assignments'
     | '/certificates'
     | '/learn'
+    | '/teach'
   id:
     | '__root__'
     | '/'
@@ -232,6 +243,7 @@ export interface FileRouteTypes {
     | '/_authenticated/assignments/'
     | '/_authenticated/certificates/'
     | '/_authenticated/learn/'
+    | '/_authenticated/teach/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -364,6 +376,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedLearnCourseIdRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/teach/': {
+      id: '/_authenticated/teach/'
+      path: '/teach'
+      fullPath: '/teach/'
+      preLoaderRoute: typeof AuthenticatedTeachIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
@@ -379,6 +398,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAssignmentsIndexRoute: typeof AuthenticatedAssignmentsIndexRoute
   AuthenticatedCertificatesIndexRoute: typeof AuthenticatedCertificatesIndexRoute
   AuthenticatedLearnIndexRoute: typeof AuthenticatedLearnIndexRoute
+  AuthenticatedTeachIndexRoute: typeof AuthenticatedTeachIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -396,6 +416,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAssignmentsIndexRoute: AuthenticatedAssignmentsIndexRoute,
   AuthenticatedCertificatesIndexRoute: AuthenticatedCertificatesIndexRoute,
   AuthenticatedLearnIndexRoute: AuthenticatedLearnIndexRoute,
+  AuthenticatedTeachIndexRoute: AuthenticatedTeachIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
