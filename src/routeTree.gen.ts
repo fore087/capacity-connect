@@ -18,6 +18,8 @@ import { Route as AuthenticatedNotificationsRouteImport } from './routes/_authen
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as CoursesIndexRouteImport } from './routes/courses.index'
 import { Route as CoursesCourseIdRouteImport } from './routes/courses.$courseId'
+import { Route as AuthenticatedAssignmentsIndexRouteImport } from './routes/_authenticated/assignments.index'
+import { Route as AuthenticatedAssignmentsAssignmentIdRouteImport } from './routes/_authenticated/assignments.$assignmentId'
 import { Route as AuthenticatedLearnIndexRouteImport } from './routes/_authenticated/learn.index'
 import { Route as AuthenticatedLearnCourseIdRouteImport } from './routes/_authenticated/learn.$courseId'
 
@@ -66,6 +68,18 @@ const CoursesCourseIdRoute = CoursesCourseIdRouteImport.update({
   path: '/courses/$courseId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAssignmentsIndexRoute =
+  AuthenticatedAssignmentsIndexRouteImport.update({
+    id: '/assignments/',
+    path: '/assignments/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAssignmentsAssignmentIdRoute =
+  AuthenticatedAssignmentsAssignmentIdRouteImport.update({
+    id: '/assignments/$assignmentId',
+    path: '/assignments/$assignmentId',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedLearnIndexRoute = AuthenticatedLearnIndexRouteImport.update({
   id: '/learn/',
   path: '/learn/',
@@ -87,7 +101,9 @@ export interface FileRoutesByFullPath {
   '/profile': typeof AuthenticatedProfileRoute
   '/courses/$courseId': typeof CoursesCourseIdRoute
   '/courses/': typeof CoursesIndexRoute
+  '/assignments/$assignmentId': typeof AuthenticatedAssignmentsAssignmentIdRoute
   '/learn/$courseId': typeof AuthenticatedLearnCourseIdRoute
+  '/assignments/': typeof AuthenticatedAssignmentsIndexRoute
   '/learn/': typeof AuthenticatedLearnIndexRoute
 }
 export interface FileRoutesByTo {
@@ -99,7 +115,9 @@ export interface FileRoutesByTo {
   '/profile': typeof AuthenticatedProfileRoute
   '/courses/$courseId': typeof CoursesCourseIdRoute
   '/courses': typeof CoursesIndexRoute
+  '/assignments/$assignmentId': typeof AuthenticatedAssignmentsAssignmentIdRoute
   '/learn/$courseId': typeof AuthenticatedLearnCourseIdRoute
+  '/assignments': typeof AuthenticatedAssignmentsIndexRoute
   '/learn': typeof AuthenticatedLearnIndexRoute
 }
 export interface FileRoutesById {
@@ -113,7 +131,9 @@ export interface FileRoutesById {
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/courses/$courseId': typeof CoursesCourseIdRoute
   '/courses/': typeof CoursesIndexRoute
+  '/_authenticated/assignments/$assignmentId': typeof AuthenticatedAssignmentsAssignmentIdRoute
   '/_authenticated/learn/$courseId': typeof AuthenticatedLearnCourseIdRoute
+  '/_authenticated/assignments/': typeof AuthenticatedAssignmentsIndexRoute
   '/_authenticated/learn/': typeof AuthenticatedLearnIndexRoute
 }
 export interface FileRouteTypes {
@@ -127,7 +147,9 @@ export interface FileRouteTypes {
     | '/profile'
     | '/courses/$courseId'
     | '/courses/'
+    | '/assignments/$assignmentId'
     | '/learn/$courseId'
+    | '/assignments/'
     | '/learn/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -139,7 +161,9 @@ export interface FileRouteTypes {
     | '/profile'
     | '/courses/$courseId'
     | '/courses'
+    | '/assignments/$assignmentId'
     | '/learn/$courseId'
+    | '/assignments'
     | '/learn'
   id:
     | '__root__'
@@ -152,7 +176,9 @@ export interface FileRouteTypes {
     | '/_authenticated/profile'
     | '/courses/$courseId'
     | '/courses/'
+    | '/_authenticated/assignments/$assignmentId'
     | '/_authenticated/learn/$courseId'
+    | '/_authenticated/assignments/'
     | '/_authenticated/learn/'
   fileRoutesById: FileRoutesById
 }
@@ -230,6 +256,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CoursesCourseIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/assignments/': {
+      id: '/_authenticated/assignments/'
+      path: '/assignments'
+      fullPath: '/assignments/'
+      preLoaderRoute: typeof AuthenticatedAssignmentsIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/assignments/$assignmentId': {
+      id: '/_authenticated/assignments/$assignmentId'
+      path: '/assignments/$assignmentId'
+      fullPath: '/assignments/$assignmentId'
+      preLoaderRoute: typeof AuthenticatedAssignmentsAssignmentIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/learn/': {
       id: '/_authenticated/learn/'
       path: '/learn'
@@ -251,7 +291,9 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedNotificationsRoute: typeof AuthenticatedNotificationsRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
+  AuthenticatedAssignmentsAssignmentIdRoute: typeof AuthenticatedAssignmentsAssignmentIdRoute
   AuthenticatedLearnCourseIdRoute: typeof AuthenticatedLearnCourseIdRoute
+  AuthenticatedAssignmentsIndexRoute: typeof AuthenticatedAssignmentsIndexRoute
   AuthenticatedLearnIndexRoute: typeof AuthenticatedLearnIndexRoute
 }
 
@@ -259,7 +301,10 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedNotificationsRoute: AuthenticatedNotificationsRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
+  AuthenticatedAssignmentsAssignmentIdRoute:
+    AuthenticatedAssignmentsAssignmentIdRoute,
   AuthenticatedLearnCourseIdRoute: AuthenticatedLearnCourseIdRoute,
+  AuthenticatedAssignmentsIndexRoute: AuthenticatedAssignmentsIndexRoute,
   AuthenticatedLearnIndexRoute: AuthenticatedLearnIndexRoute,
 }
 
