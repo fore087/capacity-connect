@@ -49,7 +49,6 @@ function Monitoring() {
   const course = (id: string) => data.courses.find((x) => x.id === id)?.title ?? "—";
   const enrolled = (courseId: string) => data.enrollments.filter((x) => x.course_id === courseId).length;
   const trainers = data.people.filter((x) => (x.user_roles ?? []).some((r) => r.role === "trainer"));
-  const th = "p-3 text-left font-medium";
 
   return (
     <div>
@@ -104,7 +103,6 @@ function Monitoring() {
           })}
         </div>
       ))}
-      <span className="hidden">{th}</span>
     </div>
   );
 }

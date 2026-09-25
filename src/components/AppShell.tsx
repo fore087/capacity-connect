@@ -34,6 +34,7 @@ const NAV: Record<Role, NavItem[]> = {
     { to: "/dashboard", label: "Dashboard", icon: <LayoutDashboard className="h-4 w-4" /> },
     { to: "/admin/users", label: "Users", icon: <Users className="h-4 w-4" /> },
     { to: "/admin/courses", label: "Courses", icon: <BookOpen className="h-4 w-4" /> },
+    { to: "/admin/monitoring", label: "Monitoring", icon: <ClipboardCheck className="h-4 w-4" /> },
     { to: "/admin/competencies", label: "Competency matching", icon: <Network className="h-4 w-4" /> },
     { to: "/admin/announcements", label: "Announcements", icon: <Megaphone className="h-4 w-4" /> },
     { to: "/admin/achievements", label: "Achievements", icon: <Trophy className="h-4 w-4" /> },
