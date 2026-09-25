@@ -184,7 +184,7 @@ function AdminDashboard() {
         <StatCard label="Courses" value={s.courses} icon={<BookOpen className="h-5 w-5" />} hint={`${s.published_courses} published`} />
         <StatCard label="Enrolments" value={s.enrollments} icon={<Library className="h-5 w-5" />} hint={`${s.active_learners} active learners`} />
         <StatCard label="Assessments" value={s.assessments} icon={<ClipboardCheck className="h-5 w-5" />} hint={`${s.attempts} attempts`} />
-        <StatCard label="Assignment submissions" value={s.submissions} icon={<FileText className="h-5 w-5" />} />
+        <StatCard label="Assignment submissions" value={s.submissions} hint="See Monitoring for details" icon={<FileText className="h-5 w-5" />} />
         <StatCard label="Certificates issued" value={s.certificates} icon={<Award className="h-5 w-5" />} hint={`Completion rate ${s.completion_rate}%`} />
       </div>
       <div className="mt-8 grid gap-6 lg:grid-cols-3">
