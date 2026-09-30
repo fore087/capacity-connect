@@ -20,6 +20,8 @@ import { Route as AuthenticatedNotificationsRouteImport } from './routes/_authen
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as CoursesIndexRouteImport } from './routes/courses.index'
 import { Route as CoursesCourseIdRouteImport } from './routes/courses.$courseId'
+import { Route as PSlugRouteImport } from './routes/p.$slug'
+import { Route as VerifyCodeRouteImport } from './routes/verify.$code'
 import { Route as AuthenticatedAdminAchievementsRouteImport } from './routes/_authenticated/admin.achievements'
 import { Route as AuthenticatedAdminAnnouncementsRouteImport } from './routes/_authenticated/admin.announcements'
 import { Route as AuthenticatedAdminCompetenciesRouteImport } from './routes/_authenticated/admin.competencies'
@@ -92,6 +94,16 @@ const CoursesIndexRoute = CoursesIndexRouteImport.update({
 const CoursesCourseIdRoute = CoursesCourseIdRouteImport.update({
   id: '/courses/$courseId',
   path: '/courses/$courseId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PSlugRoute = PSlugRouteImport.update({
+  id: '/p/$slug',
+  path: '/p/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VerifyCodeRoute = VerifyCodeRouteImport.update({
+  id: '/verify/$code',
+  path: '/verify/$code',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedAdminAchievementsRoute =
@@ -210,6 +222,8 @@ export interface FileRoutesByFullPath {
   '/notifications': typeof AuthenticatedNotificationsRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/courses/$courseId': typeof CoursesCourseIdRoute
+  '/p/$slug': typeof PSlugRoute
+  '/verify/$code': typeof VerifyCodeRoute
   '/courses/': typeof CoursesIndexRoute
   '/admin/achievements': typeof AuthenticatedAdminAchievementsRoute
   '/admin/announcements': typeof AuthenticatedAdminAnnouncementsRoute
@@ -240,6 +254,8 @@ export interface FileRoutesByTo {
   '/notifications': typeof AuthenticatedNotificationsRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/courses/$courseId': typeof CoursesCourseIdRoute
+  '/p/$slug': typeof PSlugRoute
+  '/verify/$code': typeof VerifyCodeRoute
   '/courses': typeof CoursesIndexRoute
   '/admin/achievements': typeof AuthenticatedAdminAchievementsRoute
   '/admin/announcements': typeof AuthenticatedAdminAnnouncementsRoute
@@ -272,6 +288,8 @@ export interface FileRoutesById {
   '/_authenticated/notifications': typeof AuthenticatedNotificationsRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/courses/$courseId': typeof CoursesCourseIdRoute
+  '/p/$slug': typeof PSlugRoute
+  '/verify/$code': typeof VerifyCodeRoute
   '/courses/': typeof CoursesIndexRoute
   '/_authenticated/admin/achievements': typeof AuthenticatedAdminAchievementsRoute
   '/_authenticated/admin/announcements': typeof AuthenticatedAdminAnnouncementsRoute
@@ -304,6 +322,8 @@ export interface FileRouteTypes {
     | '/notifications'
     | '/profile'
     | '/courses/$courseId'
+    | '/p/$slug'
+    | '/verify/$code'
     | '/courses/'
     | '/admin/achievements'
     | '/admin/announcements'
@@ -334,6 +354,8 @@ export interface FileRouteTypes {
     | '/notifications'
     | '/profile'
     | '/courses/$courseId'
+    | '/p/$slug'
+    | '/verify/$code'
     | '/courses'
     | '/admin/achievements'
     | '/admin/announcements'
@@ -365,6 +387,8 @@ export interface FileRouteTypes {
     | '/_authenticated/notifications'
     | '/_authenticated/profile'
     | '/courses/$courseId'
+    | '/p/$slug'
+    | '/verify/$code'
     | '/courses/'
     | '/_authenticated/admin/achievements'
     | '/_authenticated/admin/announcements'
@@ -394,6 +418,8 @@ export interface RootRouteChildren {
   ResetPasswordRoute: typeof ResetPasswordRoute
   SetupRoute: typeof SetupRoute
   CoursesCourseIdRoute: typeof CoursesCourseIdRoute
+  PSlugRoute: typeof PSlugRoute
+  VerifyCodeRoute: typeof VerifyCodeRoute
   CoursesIndexRoute: typeof CoursesIndexRoute
 }
 
@@ -474,6 +500,20 @@ declare module '@tanstack/react-router' {
       path: '/courses/$courseId'
       fullPath: '/courses/$courseId'
       preLoaderRoute: typeof CoursesCourseIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/p/$slug': {
+      id: '/p/$slug'
+      path: '/p/$slug'
+      fullPath: '/p/$slug'
+      preLoaderRoute: typeof PSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/verify/$code': {
+      id: '/verify/$code'
+      path: '/verify/$code'
+      fullPath: '/verify/$code'
+      preLoaderRoute: typeof VerifyCodeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/admin/achievements': {
@@ -668,6 +708,8 @@ const rootRouteChildren: RootRouteChildren = {
   ResetPasswordRoute: ResetPasswordRoute,
   SetupRoute: SetupRoute,
   CoursesCourseIdRoute: CoursesCourseIdRoute,
+  PSlugRoute: PSlugRoute,
+  VerifyCodeRoute: VerifyCodeRoute,
   CoursesIndexRoute: CoursesIndexRoute,
 }
 export const routeTree = rootRouteImport
