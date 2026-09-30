@@ -89,6 +89,11 @@ function AuthPage() {
     });
     setBusy(false);
     if (error) { toast.error(error.message); return; }
+    if (data.user && (data.user.identities ?? []).length === 0) {
+      toast.error("This email is already registered. Please sign in, or use 'Forgot your password?'.");
+      setTab("login");
+      return;
+    }
     if (!data.session) setCheckEmail(true);
   }
 
