@@ -43,7 +43,12 @@ function CertificateView() {
             <div><p className="font-semibold">{fmtDate(c.issued_at)}</p><p className="text-muted-foreground">Completion date</p></div>
             <div><p className="border-t pt-2 font-mono font-semibold">{c.certificate_code}</p><p className="text-muted-foreground">Certificate ID</p></div>
           </div>
-          <p className="text-xs italic text-muted-foreground">Issued by Capacity Connect — Build Skills. Build Capacity. Build the Future.</p>
+          <div className="flex items-center gap-3 text-left">
+            <img
+              src={`https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${encodeURIComponent(`${typeof window !== "undefined" ? window.location.origin : ""}/verify/${c.certificate_code}`)}`}
+              alt="QR code to verify this certificate" className="h-20 w-20" />
+            <p className="text-xs italic text-muted-foreground">Scan to verify at {typeof window !== "undefined" ? window.location.host : ""}/verify/{c.certificate_code}<br />Issued by Capacity Connect — Build Skills. Build Capacity. Build the Future.</p>
+          </div>
         </div>
       </div>
     </div>

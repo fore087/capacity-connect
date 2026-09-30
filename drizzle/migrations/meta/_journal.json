@@ -15,6 +15,13 @@
       "when": 1790311411145,
       "tag": "0001_fk_hardening_and_indexes",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1790751799524,
+      "tag": "0002_public_portfolio",
+      "breakpoints": true
     }
   ]
 }

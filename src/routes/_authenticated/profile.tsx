@@ -10,6 +10,7 @@ import { uploadFile, validateFile } from "@/lib/files";
 import { LEVELS, levelName } from "@/lib/competency";
 import { PageHeader, StatusBadge, errMsg } from "@/components/common";
 import { UserAvatar } from "@/components/Avatar";
+import { PortfolioSettings } from "@/components/PortfolioSettings";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -80,7 +81,7 @@ function ProfilePage() {
           <div className="flex items-end"><Button disabled={busy}>Save details</Button></div>
         </form>
       </section>
-      {role === "trainee" && <TraineeDetails uid={uid} />}
+      {role === "trainee" && <><PortfolioSettings uid={uid} fullName={profile?.full_name ?? ""} /><TraineeDetails uid={uid} /></>}
       {role === "trainer" && <><TrainerDetails uid={uid} /><TrainerCompetencies uid={uid} /></>}
     </div>
   );

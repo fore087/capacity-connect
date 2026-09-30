@@ -694,6 +694,44 @@ export type Database = {
           },
         ]
       }
+      portfolios: {
+        Row: {
+          about: string | null
+          created_at: string
+          headline: string | null
+          is_public: boolean
+          slug: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          about?: string | null
+          created_at?: string
+          headline?: string | null
+          is_public?: boolean
+          slug: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          about?: string | null
+          created_at?: string
+          headline?: string | null
+          is_public?: boolean
+          slug?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "portfolios_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           account_status: Database["public"]["Enums"]["account_status"]
@@ -1096,6 +1134,7 @@ export type Database = {
         Returns: Json
       }
       get_attempt_review: { Args: { _assessment: string }; Returns: Json }
+      get_public_portfolio: { Args: { _slug: string }; Returns: Json }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -1173,6 +1212,7 @@ export type Database = {
         }[]
       }
       trainer_stats: { Args: never; Returns: Json }
+      verify_certificate: { Args: { _code: string }; Returns: Json }
     }
     Enums: {
       account_status: "active" | "suspended"
